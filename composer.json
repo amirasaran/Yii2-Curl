@@ -1,0 +1,21 @@
+{
+    "name": "amirasaran/yii2-curl",
+    "description": "Create Rest Request (POST,GET,PUT,DELETE,...)",
+    "type": "library",
+    "keywords": ["yii2","extension","curl"],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Amir Mohsen Asaran",
+            "email": "Admin@mihanmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "amirasran\\yii2curl\\": ""
+        }
+    }
+}
