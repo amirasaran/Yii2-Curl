@@ -17,5 +17,11 @@
         "psr-4": {
             "amirasran\\yii2curl\\": ""
         }
-    }
+    },
+    "repositories":[
+        {
+            "type": "git",
+            "url": "git@github.com:amirasaran/Yii2-Curl.git"
+        }
+    ]
 }
