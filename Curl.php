@@ -41,13 +41,12 @@ class Curl extends Component
      *
      * @param string $url URL
      * @param array $options URL options
-     * @param string $body request body
      * @param boolean $raw if response body contains JSON and should be decoded
      * @return mixed response
      */
-    public function get($url, $options = [], $body = null, $raw = true)
+    public function get($url, $options = [], $raw = true)
     {
-        return $this->httpRequest('GET', $this->createUrl($url, $options), $body, $raw);
+        return $this->httpRequest('GET', $this->createUrl($url, $options), null, $raw);
     }
 
     /**
@@ -55,7 +54,7 @@ class Curl extends Component
      *
      * @param string $url URL
      * @param array $options URL options
-     * @param string $body request body
+     * @param array $body request body
      * @return mixed response
      */
     public function head($url, $options = [], $body = null)
@@ -68,7 +67,7 @@ class Curl extends Component
      *
      * @param string $url URL
      * @param array $options URL options
-     * @param string $body request body
+     * @param array $body request body
      * @param boolean $raw if response body contains JSON and should be decoded
      * @return mixed response
      */
@@ -82,7 +81,7 @@ class Curl extends Component
      *
      * @param string $url URL
      * @param array $options URL options
-     * @param string $body request body
+     * @param array $body request body
      * @param boolean $raw if response body contains JSON and should be decoded
      * @return mixed response
      */
@@ -96,7 +95,7 @@ class Curl extends Component
      *
      * @param string $url URL
      * @param array $options URL options
-     * @param string $body request body
+     * @param array $body request body
      * @param boolean $raw if response body contains JSON and should be decoded
      * @return mixed response
      */
@@ -135,7 +134,7 @@ class Curl extends Component
      *
      * @param string $method method name
      * @param string $url URL
-     * @param string $requestBody request body
+     * @param array $requestBody request body
      * @param boolean $raw if response body contains JSON and should be decoded
      * @throws Exception if request failed
      * @throws HttpException
@@ -166,7 +165,11 @@ class Curl extends Component
             $options[CURLOPT_TIMEOUT] = $this->dataTimeout;
         }
         if ($requestBody !== null) {
-            $options[CURLOPT_POSTFIELDS] = $requestBody;
+            if(is_array($requestBody))
+                $options[CURLOPT_POSTFIELDS] = http_build_query($requestBody);
+            else
+                $options[CURLOPT_POSTFIELDS] = $requestBody;
+
         }
         if ($method == 'HEAD') {
             $options[CURLOPT_NOBODY] = true;
