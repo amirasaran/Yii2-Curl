@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist amirasaran/yii2-curl "*"
+php composer.phar require amirasaran/yii2-curl:dev-master
 ```
 
 or add
 
 ```
-"amirasaran/yii2-curl": "*"
+"amirasaran/yii2-curl": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
@@ -27,5 +27,6 @@ Usage
 
 Once the extension is installed, simply use it in your code by  :
 
-```php
-<?= \amirasran\yii2curl\AutoloadExample::widget(); ?>```
+```
+comming soon !
+```
