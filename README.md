@@ -22,11 +22,32 @@ or add
 to the require section of your `composer.json` file.
 
 
+Configure
+---------
+
+Add the following code to your `common/config/main.php` `components`
+
+```php
+'components' => [
+    ...
+    'curl' => [
+        'class' => 'amirasaran\yii2-curl\Curl',
+        'connectionTimeout' => 100,
+        'dataTimeout' => 100,
+    ],
+    ...
+]
+```
+
+
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
-
-```
-comming soon !
+```php
+        $url = 'http://jsonplaceholder.typicode.com/posts';
+        /** @var \amirasran\yii2curl\Curl $curl */
+        $curl = Yii::$app->curl;
+        $res = $curl->get($url,[],false);
+        echo '<pre>';
+        print_r($res);exit;
 ```
