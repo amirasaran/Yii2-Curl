@@ -29,6 +29,11 @@ class Curl extends Component
     public $dataTimeout = null;
 
     /**
+     * @var array
+     */
+    private $_options = [];
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -129,6 +134,29 @@ class Curl extends Component
         return $url;
     }
 
+    public function setOption($name,$value){
+        $this->_options[$name] = $value;
+    }
+
+    /**
+     * @param $server
+     * @param $port
+     * @param $username
+     * @param $password
+     * @param $proxy_type
+     */
+    public function setProxy($server, $port, $username = null, $password = null, $proxy_type = CURLPROXY_HTTP){
+        $this->setOption(CURLOPT_PROXYTYPE,$proxy_type);
+        $this->setOption(CURLOPT_PROXYPORT,$port);
+        $this->setOption(CURLOPT_PROXY,$server);
+
+        if($proxy_type == CURLPROXY_HTTP)
+            $this->setOption(CURLOPT_HTTPPROXYTUNNEL,true);
+
+        if(!is_null($username) && !is_null($password))
+            $this->setOption(CURLOPT_PROXYUSERPWD,"{$username}:{$password}");
+    }
+
     /**
      * Performs HTTP request
      *
@@ -158,6 +186,8 @@ class Curl extends Component
             },
             CURLOPT_CUSTOMREQUEST  => $method,
         ];
+        $options = array_merge($options,$this->_options);
+
         if ($this->connectionTimeout !== null) {
             $options[CURLOPT_CONNECTTIMEOUT] = $this->connectionTimeout;
         }
