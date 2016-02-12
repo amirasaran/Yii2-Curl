@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "amirasran\\yii2curl\\": ""
+            "amirasaran\\yii2curl\\": ""
         }
     },
     "repositories":[

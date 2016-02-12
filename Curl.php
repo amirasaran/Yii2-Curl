@@ -1,6 +1,6 @@
 <?php
 
-namespace amirasran\yii2curl;
+namespace amirasaran\yii2curl;
 
 use Yii;
 use yii\base\Component;
