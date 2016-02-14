@@ -45,7 +45,7 @@ Usage
 
 ```php
         $url = 'http://jsonplaceholder.typicode.com/posts';
-        /** @var \amirasran\yii2curl\Curl $curl */
+        /** @var \amirasaran\yii2curl\Curl $curl */
         $curl = Yii::$app->curl;
         $res = $curl->get($url,[],false);
         echo '<pre>';
