@@ -146,9 +146,11 @@ class Curl extends Component
      * @param $proxy_type
      */
     public function setProxy($server, $port, $username = null, $password = null, $proxy_type = CURLPROXY_HTTP){
-        $this->setOption(CURLOPT_PROXYTYPE,$proxy_type);
+        $this->setOption(CURLOPT_PROXYTYPE, 'HTTP');
         $this->setOption(CURLOPT_PROXYPORT,$port);
         $this->setOption(CURLOPT_PROXY,$server);
+        $this->setOption(CURLOPT_HEADER, 0); // no headers in the output
+        $this->setOption(CURLOPT_RETURNTRANSFER, 1);
 
         if($proxy_type == CURLPROXY_HTTP)
             $this->setOption(CURLOPT_HTTPPROXYTUNNEL,true);
@@ -186,7 +188,10 @@ class Curl extends Component
             },
             CURLOPT_CUSTOMREQUEST  => $method,
         ];
-        $options = array_merge($options,$this->_options);
+
+        foreach($this->_options as $key => $value){
+            $options[$key] = $value;
+        }
 
         if ($this->connectionTimeout !== null) {
             $options[CURLOPT_CONNECTTIMEOUT] = $this->connectionTimeout;
@@ -211,7 +216,8 @@ class Curl extends Component
         $curl = curl_init($url);
         curl_setopt_array($curl, $options);
         if (curl_exec($curl) === false) {
-            throw new Exception('curl request failed: ' . curl_error($curl) , curl_errno($curl));
+
+            throw new Exception('curl request failed: ' . curl_error($curl) );
         }
         $responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
