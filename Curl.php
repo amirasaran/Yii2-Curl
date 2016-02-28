@@ -143,17 +143,11 @@ class Curl extends Component
      * @param $port
      * @param $username
      * @param $password
-     * @param $proxy_type
      */
-    public function setProxy($server, $port, $username = null, $password = null, $proxy_type = CURLPROXY_HTTP){
-        $this->setOption(CURLOPT_PROXYTYPE, 'HTTP');
+    public function setProxy($server, $port, $username = null, $password = null){
         $this->setOption(CURLOPT_PROXYPORT,$port);
         $this->setOption(CURLOPT_PROXY,$server);
-        $this->setOption(CURLOPT_HEADER, 0); // no headers in the output
-        $this->setOption(CURLOPT_RETURNTRANSFER, 1);
 
-        if($proxy_type == CURLPROXY_HTTP)
-            $this->setOption(CURLOPT_HTTPPROXYTUNNEL,true);
 
         if(!is_null($username) && !is_null($password))
             $this->setOption(CURLOPT_PROXYUSERPWD,"{$username}:{$password}");
