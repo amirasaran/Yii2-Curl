@@ -153,6 +153,10 @@ class Curl extends Component
             $this->setOption(CURLOPT_PROXYUSERPWD,"{$username}:{$password}");
     }
 
+    public function setUserAgent($userAgent = null){
+        $this->setOption(CURLOPT_USERAGENT,$userAgent);
+    }
+
     /**
      * Performs HTTP request
      *
@@ -171,7 +175,6 @@ class Curl extends Component
         // response body
         $body = '';
         $options = [
-            CURLOPT_USERAGENT      => 'Yii Framework 2 ' . __CLASS__,
             CURLOPT_RETURNTRANSFER => false,
             CURLOPT_HEADER         => false,
             // http://www.php.net/manual/en/function.curl-setopt.php#82418
@@ -182,6 +185,9 @@ class Curl extends Component
             },
             CURLOPT_CUSTOMREQUEST  => $method,
         ];
+
+        if(!isset($this->_options[CURLOPT_USERAGENT]))
+            $options[CURLOPT_USERAGENT] = 'Yii Framework 2 ' . __CLASS__;
 
         foreach($this->_options as $key => $value){
             $options[$key] = $value;
