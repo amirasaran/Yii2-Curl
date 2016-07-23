@@ -31,7 +31,7 @@ Add the following code to your `common/config/main.php` `components`
 'components' => [
     ...
     'curl' => [
-        'class' => 'amirasaran\yii2-curl\Curl',
+        'class' => 'amirasaran\yii2curl\Curl',
         'connectionTimeout' => 100,
         'dataTimeout' => 100,
     ],
